@@ -1,0 +1,23 @@
+#encoding=utf-8
+import owaRequest.reqGet
+
+#判断exchange版本号
+def judge_version(owaAddr):
+    #https://docs.microsoft.com/zh-cn/exchange/new-features/build-numbers-and-release-dates?view=exchserver-2019
+    #内部版本号集合
+    interShortVersion = ['15.2.986', '15.2.922', '15.2.858', '15.2.792', '15.2.721', '15.2.659', '15.2.595', '15.2.529', '15.2.464', '15.2.397', '15.2.330', '15.2.221', '15.2.196', '15.1.2375', '15.1.2308', '15.1.2242', '15.1.2176', '15.1.2106', '15.1.2044', '15.1.1979', '15.1.1913', '15.1.1847', '15.1.1779', '15.1.1713', '15.1.1591', '15.1.1531', '15.1.1466', '15.1.1415', '15.1.1261', '15.1.1034', '15.1.845', '15.1.669', '15.1.544', '15.1.466', '15.1.396', '15.1.225', '15.0.1497', '15.0.1473', '15.0.1395', '15.0.1367', '15.0.1365', '15.0.1347', '15.0.1320', '15.0.1293', '15.0.1263', '15.0.1236', '15.0.1210', '15.0.1178', '15.0.1156', '15.0.1130', '15.0.1104', '15.0.1076', '15.0.1044', '15.0.995', '15.0.913', '15.0.847', '15.0.775', '15.0.712', '15.0.620', '15.0.516']
+    #产品版本号集合
+    ExchangeProductName = ['Microsoft Exchange Server 2019 Cumulative Update 11', 'Microsoft Exchange Server 2019 Cumulative Update 10', 'Microsoft Exchange Server 2019 Cumulative Update 9', 'Microsoft Exchange Server 2019 Cumulative Update 8', 'Microsoft Exchange Server 2019 Cumulative Update 7', 'Microsoft Exchange Server 2019 Cumulative Update 6', 'Microsoft Exchange Server 2019 Cumulative Update 5', 'Microsoft Exchange Server 2019 Cumulative Update 4', 'Microsoft Exchange Server 2019 Cumulative Update 3', 'Microsoft Exchange Server 2019 Cumulative Update 2', 'Microsoft Exchange Server 2019 Cumulative Update 1', 'Microsoft Exchange Server 2019RTM', 'Microsoft Exchange Server 2019Preview', 'Microsoft Exchange Server 2016 Cumulative Update 22', 'Microsoft Exchange Server 2016 Cumulative Update 21', 'Microsoft Exchange Server 2016 Cumulative Update 20', 'Microsoft Exchange Server 2016 Cumulative Update 19', 'Microsoft Exchange Server 2016 Cumulative Update 18', 'Microsoft Exchange Server 2016 Cumulative Update 17', 'Microsoft Exchange Server 2016 Cumulative Update 16', 'Microsoft Exchange Server 2016 Cumulative Update 15', 'Microsoft Exchange Server 2016 Cumulative Update 14', 'Microsoft Exchange Server 2016 Cumulative Update 13', 'Microsoft Exchange Server 2016 Cumulative Update 12', 'Microsoft Exchange Server 2016 Cumulative Update 11', 'Microsoft Exchange Server 2016 Cumulative Update 10', 'Microsoft Exchange Server 2016 Cumulative Update 9', 'Microsoft Exchange Server 2016 Cumulative Update 8', 'Microsoft Exchange Server 2016 Cumulative Update 7', 'Microsoft Exchange Server 2016 Cumulative Update 6', 'Microsoft Exchange Server 2016 Cumulative Update 5', 'Microsoft Exchange Server 2016 Cumulative Update 4', 'Microsoft Exchange Server 2016 Cumulative Update 3', 'Microsoft Exchange Server 2016 Cumulative Update 2', 'Microsoft Exchange Server 2016 Cumulative Update 1', 'Microsoft Exchange Server 2016(RTM)OR(Preview)', 'Microsoft Exchange Server 2013 Cumulative Update 23', 'Microsoft Exchange Server 2013 Cumulative Update 22', 'Microsoft Exchange Server 2013 Cumulative Update 21', 'Microsoft Exchange Server 2013 Cumulative Update 20', 'Microsoft Exchange Server 2013 Cumulative Update 19', 'Microsoft Exchange Server 2013 Cumulative Update 18', 'Microsoft Exchange Server 2013 Cumulative Update 17', 'Microsoft Exchange Server 2013 Cumulative Update 16', 'Microsoft Exchange Server 2013 Cumulative Update 15', 'Microsoft Exchange Server 2013 Cumulative Update 14', 'Microsoft Exchange Server 2013 Cumulative Update 13', 'Microsoft Exchange Server 2013 Cumulative Update 12', 'Microsoft Exchange Server 2013 Cumulative Update 11', 'Microsoft Exchange Server 2013 Cumulative Update 10', 'Microsoft Exchange Server 2013 Cumulative Update 9', 'Microsoft Exchange Server 2013 Cumulative Update 8', 'Microsoft Exchange Server 2013 Cumulative Update 7', 'Microsoft Exchange Server 2013 Cumulative Update 6', 'Microsoft Exchange Server 2013 Cumulative Update 5', 'Microsoft Exchange Server 2013SP1', 'Microsoft Exchange Server 2013 Cumulative Update 3', 'Microsoft Exchange Server 2013 Cumulative Update 2', 'Microsoft Exchange Server 2013 Cumulative Update 1', 'Microsoft Exchange Server 2013RTM']
+    ExchangeVersion = owaRequest.reqGet.get_owa_version(owaAddr)
+    for num in range(0, len(interShortVersion)):
+        #列表中寻找到匹配版本号则退出循环
+        if ExchangeVersion == interShortVersion[num]:
+            retInterShortVersion = interShortVersion[num]
+            retExchangeProductName = ExchangeProductName[num]
+            break
+        #未知版本号
+        else:
+            retInterShortVersion = '无此内部版本号'
+            retExchangeProductName = '无此产品版本号'
+    return retInterShortVersion, retExchangeProductName
+    
