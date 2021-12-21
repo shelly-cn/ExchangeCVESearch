@@ -1,4 +1,7 @@
 # ExchangeCVESearch
+
+内部版本号由于太费时间，没有完全匹配完成，可通过Microsoft官网：https://docs.microsoft.com/zh-cn/exchange/new-features/build-numbers-and-release-dates?view=exchserver-2019 进行匹配并写入文件“versionJud.py”的“interShortVersion”字段和“ExchangeProductName”字段，格式按照之前定义好的格式进行写入
+
 search exchange cve ID
 
 Find the cve id: 
